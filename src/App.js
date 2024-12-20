@@ -1,12 +1,25 @@
 import './App.css';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import Game from './Game';
+import logo from './assets/logo.jpg';
 
 function App() {
   return (
     <div className="App">
-      <Game />
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <br />
+        <br />
+        <p>
+          Welcome to Vietyum Website!
+        </p>
+        <p>
+          App building is in progress... 
+        </p>
+        <p>
+          Stay tuned for more exciting updates!
+        </p>
+      </header>
     </div>
   );
 }
