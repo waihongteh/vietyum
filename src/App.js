@@ -1,11 +1,16 @@
 import './App.css';
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import logo from './assets/logo.jpg';
+import TopNav from './components/TopNav';
+
+const handleButtonClick = (message) => {
+  alert(message);
+};
 
 function App() {
   return (
     <div className="App">
+      <TopNav />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <br />
@@ -37,7 +42,6 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig);;
 
 export default App;
