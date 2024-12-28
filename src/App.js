@@ -1,20 +1,12 @@
 import './App.css';
 import { initializeApp } from "firebase/app";
-import logo from './assets/logo.jpg';
 import TopNav from './components/TopNav';
-
-const handleButtonClick = (message) => {
-  alert(message);
-};
 
 function App() {
   return (
     <div className="App">
       <TopNav />
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <br />
-        <br />
         <p>
           Welcome to Vietyum Website!
         </p>
