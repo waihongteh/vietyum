@@ -1,6 +1,7 @@
 import './App.css';
 import { initializeApp } from "firebase/app";
 import TopNav from './components/TopNav';
+import ArrowButton from './components/ArrowButton';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <p>
           Stay tuned for more exciting updates!
         </p>
+        <ArrowButton text="Click Me" onClick={() => alert("Button clicked!")}/>
       </header>
     </div>
   );
