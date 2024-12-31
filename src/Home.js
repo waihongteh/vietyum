@@ -1,4 +1,4 @@
-import './App.css';
+import './Home.css';
 import { initializeApp } from "firebase/app";
 import TopNav from './components/TopNav';
 import ArrowButton from './components/ArrowButton';
@@ -7,18 +7,12 @@ function App() {
   return (
     <div className="App">
       <TopNav />
-      <header className="App-header">
-        <p>
-          Welcome to Vietyum Website!
-        </p>
-        <p>
-          App building is in progress... 
-        </p>
-        <p>
-          Stay tuned for more exciting updates!
-        </p>
-        <ArrowButton text="Click Me" onClick={() => alert("Button clicked!")}/>
-      </header>
+      <div className="main-content col">
+        <div>
+          <h1>Welcome to Vietyum Website!</h1>
+        </div>
+        <ArrowButton text="Start" onClick={() => window.location.href = "/game"}/>
+      </div>
     </div>
   );
 }

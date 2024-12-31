@@ -1,16 +1,17 @@
 .topnav {
-    margin: 0;
-    padding: 0 0 0 2%;
+    margin: 0 0 0 0;
+    padding: 0 1% 0 2%;
     list-style-type: none;
     overflow: hidden;
     background-color: #ffffff;
     position: fixed;
-    width: 98%;
+    width: 97%;
     top: 0;
 }
 
 .topnav li {
     float: left;
+    padding: 12px 0 12px 0;
 }
 
 .topnav li a {
@@ -34,11 +35,19 @@
 .topnav li.leftmost {
     margin-left: 0;
     margin-right: 1%;
+    padding: 5px 0;
 }
 
 .topnav img {
-    height: auto;
-    width: 55px;
+    height: 70px;
+    width: 70px;
     margin: 0;
-    padding: 0;
+}
+
+.topnav-container {
+    margin: 0;
+}
+
+.topnav-divider {
+    padding-top: 85px;
 }

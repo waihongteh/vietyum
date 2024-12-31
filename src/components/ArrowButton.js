@@ -5,7 +5,7 @@ const ArrowButton = ({text, onClick}) => {
     return (
         <div>
             <button id="arrowButton" class="arrow-button" onClick={onClick}>
-                <span class="arrow-text">Click Me</span>
+                <span class="arrow-text">{text}</span>
             </button>
         </div>
     );

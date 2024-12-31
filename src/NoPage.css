@@ -1,0 +1,15 @@
+.NoPage {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 2rem;
+    color: #fff;
+    background-color: #333;
+    text-align: center;
+    margin: 0;
+}
+
+.NoPage h1 {
+    margin: 0;
+    padding: 20px 0 0 0;
+}

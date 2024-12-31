@@ -4,7 +4,7 @@ import logo from "../assets/logo.jpg";
 
 const TopNav = () => {
     return (
-        <div>
+        <div className="topnav-container">
             <ul className="topnav">
                 <li className="leftmost">
                     <img src= {logo} />
@@ -12,10 +12,12 @@ const TopNav = () => {
                 <li>
                     <a href="/">Home</a>
                 </li>
-                <li><a href="/about">About</a></li>
+                <li><a href="/aboutus">About Us</a></li>
                 <li><a href="/services">Services</a></li>
                 <li className="right"><a href="settings">Settings</a></li>
             </ul>
+            <div className="topnav-divider">
+            </div>
         </div>
     );
 };
