@@ -1,0 +1,60 @@
+/* Switch container */
+.option-switch {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e0e0e0;
+  border-radius: 34px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  user-select: none;
+  padding: 0 5px;
+  box-sizing: border-box;
+
+  /* Adjust width dynamically based on content */
+  width: 220px;
+  min-width: 220px;
+  height: 34px;
+}
+
+/* Slider */
+.switch-slider {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  height: 28px;
+  border-radius: 50px;
+  background-color: #fff;
+  z-index: 1;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  /* Adjust dynamically based on text width */
+  width: 50%;
+}
+
+/* Slider positions */
+.switch-slider.left {
+  transform: translateX(0);
+  background-color: #4caf50; /* Left side (active) color */
+}
+
+.switch-slider.right {
+  transform: translateX(100%);
+  background-color: hsl(199, 89%, 72%); /* Right side (inactive) color */
+}
+
+/* Option text */
+.option-text {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  color: #000;
+  z-index: 2;
+
+  /* Prevent text from overlapping */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

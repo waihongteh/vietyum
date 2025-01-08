@@ -4,7 +4,9 @@ import TopNav from './components/TopNav';
 import ArrowButton from './components/ArrowButton';
 
 function App() {
-  return (
+  const currLanguage = localStorage.getItem("language") ?? "english";
+  return currLanguage != "vietnamese" 
+  ? (
     <div className="App">
       <TopNav />
       <div className="main-content col">
@@ -14,7 +16,18 @@ function App() {
         <ArrowButton text="Start" onClick={() => window.location.href = "/game"}/>
       </div>
     </div>
-  );
+  )
+  : (
+    <div className="App">
+      <TopNav />
+      <div className="main-content col">
+        <div>
+          <h1>chào mừng đến với website Vietyum!</h1>
+        </div>
+        <ArrowButton text="Bắt đầu" onClick={() => window.location.href = "/game"}/>
+      </div>
+    </div>
+  )
 }
 
 // Your web app's Firebase configuration
