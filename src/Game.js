@@ -67,9 +67,15 @@ const Game = () => {
       cursors = this.input.keyboard.createCursorKeys();
 
       // Spawn stars and bombs
+      let spawnInterval = 1000;
       this.time.addEvent({
-        delay: 1000,
-        callback: spawnObjects,
+        delay: spawnInterval,
+        callback: () => {
+          spawnObjects();
+          if (spawnInterval > 200) {
+            spawnInterval -= 25;
+          }
+        },
         callbackScope: this,
         loop: true,
       });
@@ -79,9 +85,9 @@ const Game = () => {
       if (gameOver) return;
 
       if (cursors.left.isDown) {
-        basket.setVelocityX(-300);
+        basket.setVelocityX(-1500);
       } else if (cursors.right.isDown) {
-        basket.setVelocityX(300);
+        basket.setVelocityX(1500);
       } else {
         basket.setVelocityX(0);
       }
@@ -91,7 +97,7 @@ const Game = () => {
       star.disableBody(true, true);
       score += 10;
       scoreText.setText(`Score: ${score}`);
-      speed += 5; // Increase speed for progression
+      speed += 25; // Increase speed for progression
     }
 
     function hitBomb(basket, bomb) {

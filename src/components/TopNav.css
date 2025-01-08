@@ -30,6 +30,7 @@
 
 .topnav li.right {
     float: right;
+    margin-top: 11px;
 }
 
 .topnav li.leftmost {
