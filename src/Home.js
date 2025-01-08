@@ -1,25 +1,18 @@
-import './App.css';
+import './Home.css';
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import logo from './assets/logo.jpg';
+import TopNav from './components/TopNav';
+import ArrowButton from './components/ArrowButton';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <br />
-        <br />
-        <p>
-          Welcome to Vietyum Website!
-        </p>
-        <p>
-          App building is in progress... 
-        </p>
-        <p>
-          Stay tuned for more exciting updates!
-        </p>
-      </header>
+      <TopNav />
+      <div className="main-content col">
+        <div>
+          <h1>Welcome to Vietyum Website!</h1>
+        </div>
+        <ArrowButton text="Start" onClick={() => window.location.href = "/game"}/>
+      </div>
     </div>
   );
 }
@@ -37,7 +30,6 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig);;
 
 export default App;

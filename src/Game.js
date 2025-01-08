@@ -1,58 +1,135 @@
 import React, { useEffect, useRef } from 'react';
 import Phaser from 'phaser';
-import logo from './assets/logo.jpg';
+import TopNav from './components/TopNav';
+import basketImg from './assets/basket.png';
+import friesImg from './assets/fries.png';
+import vegeImg from './assets/vege.png';
+import "./Game.css";
 
 const Game = () => {
   const gameContainerRef = useRef(null);
 
   useEffect(() => {
-    // Phaser game configuration
     const config = {
-      type: Phaser.AUTO,  // Phaser will automatically choose WebGL or Canvas
-      width: window.innerWidth,         // Game width
-      height: window.innerHeight,        // Game height
-      parent: gameContainerRef.current, // The div where the game will be rendered
+      type: Phaser.AUTO,
+      width: window.innerWidth,
+      height: window.innerHeight - 50, // Account for top nav
+      parent: gameContainerRef.current,
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: { y: 0 },
+          debug: false,
+        },
+      },
       scene: {
         preload,
         create,
         update,
-      }
+      },
     };
 
-    // Initialize the Phaser game instance with the configuration
     const game = new Phaser.Game(config);
 
-    // Preload function to load assets before starting the game
+    let basket, cursors, stars, bombs, scoreText, score = 0, gameOver = false, speed = 200;
+
     function preload() {
-      this.load.image('logo', logo);  // Replace with your own asset
+      this.load.image('basket', basketImg);
+      this.load.image('star', vegeImg);
+      this.load.image('bomb', friesImg);
     }
 
-    // Create function to initialize game objects
     function create() {
-      const logo = this.add.image(400, 300, 'logo');  // Add the logo image to the center
-      this.tweens.add({
-        targets: logo,
-        y: 100,
-        x: 100,
-        duration: 2000,
-        ease: 'Power2',
-        yoyo: true,
-        repeat: -1
+      // Background color
+      this.cameras.main.setBackgroundColor('#87CEEB');
+
+      // Basket
+      basket = this.physics.add.sprite(400, 550, 'basket').setScale(0.2);
+      basket.setCollideWorldBounds(true);
+
+      // Stars group
+      stars = this.physics.add.group();
+
+      // Bombs group
+      bombs = this.physics.add.group();
+
+      // Collisions
+      this.physics.add.overlap(basket, stars, collectStar, null, this);
+      this.physics.add.overlap(basket, bombs, hitBomb, null, this);
+
+      // Score text
+      scoreText = this.add.text(16, 16, 'Score: 0', {
+        fontSize: '24px',
+        fill: '#000',
+      });
+
+      // Input
+      cursors = this.input.keyboard.createCursorKeys();
+
+      // Spawn stars and bombs
+      this.time.addEvent({
+        delay: 1000,
+        callback: spawnObjects,
+        callbackScope: this,
+        loop: true,
       });
     }
 
-    // Update function for the game loop (e.g., movement, logic)
     function update() {
-      // Game logic goes here
+      if (gameOver) return;
+
+      if (cursors.left.isDown) {
+        basket.setVelocityX(-300);
+      } else if (cursors.right.isDown) {
+        basket.setVelocityX(300);
+      } else {
+        basket.setVelocityX(0);
+      }
     }
 
-    // Clean up the Phaser game instance when the component unmounts
+    function collectStar(basket, star) {
+      star.disableBody(true, true);
+      score += 10;
+      scoreText.setText(`Score: ${score}`);
+      speed += 5; // Increase speed for progression
+    }
+
+    function hitBomb(basket, bomb) {
+      this.physics.pause();
+      basket.setTint(0xff0000);
+      gameOver = true;
+      scoreText.setText('Game Over! Press R to Restart.');
+      this.input.keyboard.on('keydown-R', () => {
+        window.location.reload();
+      });
+    }
+
+    function spawnObjects() {
+      if (gameOver) return;
+
+      // Randomly spawn stars and bombs
+      const randomX = Phaser.Math.Between(50, window.innerWidth - 50);
+
+      if (Math.random() < 0.7) {
+        const star = stars.create(randomX, 0, 'star').setScale(0.2);
+        star.setVelocityY(speed);
+      } else {
+        const bomb = bombs.create(randomX, 0, 'bomb').setScale(0.2);
+        bomb.setVelocityY(speed);
+      }
+    }
+
     return () => {
       game.destroy(true);
     };
-  }, []); // Empty dependency array ensures this runs once when the component mounts
+  }, []);
 
-  return <div ref={gameContainerRef}></div>;  // The game will render into this div
+  return (
+    <div>
+      <TopNav /> {/* Render TopNav above the game */}
+      <div ref={gameContainerRef} style={{ height: 'calc(100vh - 50px)' }}></div>
+    </div>
+  );
 };
 
 export default Game;
